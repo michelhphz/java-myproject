@@ -16,6 +16,7 @@ import com.mysystem.dto.UserDTO;
 import com.mysystem.services.PeopleService;
 import com.mysystem.services.UserService;
 import com.mysystem.utils.Growl;
+import com.mysystem.utils.GrowlType;
 
 @Named(value = "peopleMB")
 @ViewScoped
@@ -74,21 +75,37 @@ public class PeopleMB {
 	
 	public void insertPeople() throws IOException {
 		
-		System.out.println(email);
-		
 		if(email == "") {
-			Growl growl = new Growl("email", email);
-			growl.showError();
+			Growl growl = new Growl();
+			GrowlType type = GrowlType.Error;
+			growl.setMessage("Email required!");
+			growl.showGrowl(type.getType());
 			return;
 		}
+		
+		if(password == "") {
+			Growl growl = new Growl();
+			GrowlType type = GrowlType.Error;
+			growl.setMessage("Password required!");
+			growl.showGrowl(type.getType());
+			return;
+		}		
 		
 		PeopleDTO people = new PeopleDTO(null, email, name, birth);
 		UserDTO user = new UserDTO(null, email, password);
 		boolean peopleResponse = peopleService.insert(people) != null;
 		boolean userResponse = userService.insert(user) != null;
 		if(peopleResponse && userResponse) {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("http://google.com");
+			this.clear();
+			FacesContext.getCurrentInstance().getExternalContext().redirect("login.sys");;
 		}
 	}	
+	
+	public void clear() {
+		this.setEmail(null);
+		this.setName(null);
+		this.setBirth(null);
+		this.setPassword(null);
+	}
 
 }

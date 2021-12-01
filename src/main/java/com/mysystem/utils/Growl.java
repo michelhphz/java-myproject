@@ -1,6 +1,7 @@
 package com.mysystem.utils;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -9,25 +10,14 @@ import javax.inject.Named;
 @ViewScoped
 public class Growl {
 	
-	private String id;
 	private String message;			
 	
     public Growl() {
 	}
 
-	public Growl(String id, String message) {
+	public Growl(String message) {
 		super();
-		this.id = id;
 		this.message = message;
-	}
-	
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getMessage() {
@@ -40,7 +30,11 @@ public class Growl {
 	
 	// Methods
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
-        FacesContext.getCurrentInstance().addMessage(this.id, new FacesMessage(severity, summary, detail));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
+    }
+	
+    public void showGrowl(Severity type) {
+        addMessage(type, "", this.message);
     }
 
     public void showInfo() {

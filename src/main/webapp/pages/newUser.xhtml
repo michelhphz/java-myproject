@@ -15,10 +15,12 @@
 
 <h:body>
     <h:form>		        
-		<p:inputText id="email"  value="#{peopleMB.email}"/>        
-		<p:datePicker value="#{peopleMB.birth}" />
+    	<p:growl id="growl" showDetail="true" actionListener="#{growl.showError}" />
+		<p:inputText  value="#{peopleMB.email}"/>		
+		<p:inputText  value="#{peopleMB.name}"/>	       
+		<p:datePicker value="#{peopleMB.birth}" monthNavigator="true" yearNavigator="true" />
 		<p:password   value="#{peopleMB.password}"/>
-    	<p:commandButton action="#{peopleMB.insertPeople}" value="Register" />		        
+    	<p:commandButton action="#{peopleMB.insertPeople}" update="growl" value="Register" />		        
     </h:form>
 </h:body>
 </html>
