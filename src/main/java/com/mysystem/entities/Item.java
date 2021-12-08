@@ -9,52 +9,65 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
-public class User implements Serializable {
+@Table(name = "item")
+public class Item implements Serializable {
 	
-	private static final long serialVersionUID = -8190116792743188919L;
+	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long id;
-	private String password;
-	
-    @OneToOne
-    @JoinColumn(name = "people_id")
-    private People userPeople;	
-    
-    @OneToMany(mappedBy = "user")
-    private List<Valuation> valuations;	    
-	
-	public User() {}
+	private String name;
+	private Double price;
+	private String type;
 
-	public User(Long id, String password) {
+	@OneToMany
+	@JoinColumn(name = "valuation_id")
+	private List<Valuation> valuations;
+	
+	public Item() {
+	}
+
+	public Item(Long id, String name, Double price, String type) {
 		this.id = id;
-		this.password = password;
+		this.name = name;
+		this.price = price;
+		this.type = type;
 	}
 
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getName() {
+		return name;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public People getPeople() {
-		return userPeople;
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public List<Valuation> getValuations() {
@@ -77,12 +90,12 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Item other = (Item) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
+	}		
 }

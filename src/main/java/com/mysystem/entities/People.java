@@ -1,35 +1,60 @@
 package com.mysystem.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "people")
 public class People implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3731823309134471220L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String email;
 	private String name;
-	private Date birth;
+	private Calendar birth;
+	private String phone;
+	
+    @OneToOne(mappedBy = "userPeople")
+    private User user;	
+	
+    @OneToMany(mappedBy = "hostPeople")
+    private List<Lodge> hostLodges;	
+    
+    @OneToMany(mappedBy = "guestPeoples")
+    private List<Booking> guestBookings;	    
+    
+    @OneToMany(mappedBy = "orderPeople")
+    private List<Order> orders;	
+    
+	@ManyToMany
+	@JoinTable(name = "adress_people",
+			   joinColumns = @JoinColumn(name = "people_id"),
+			   inverseJoinColumns = @JoinColumn(name = "adress_id"))
+	private List<Adress> adress;    
 	
 	public People() {}
 
-	public People(Long id, String email, String name, Date birth) {
-		super();
+	public People(Long id, String email, String name, Calendar birth, String phone) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
 		this.birth = birth;
+		this.phone = phone;
 	}
 
 	public Long getId() {
@@ -56,12 +81,36 @@ public class People implements Serializable {
 		this.name = name;
 	}
 
-	public Date getBirth() {
+	public Calendar getBirth() {
 		return birth;
 	}
 
-	public void setBirth(Date birth) {
+	public void setBirth(Calendar birth) {
 		this.birth = birth;
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public List<Adress> getAdress() {
+		return adress;
+	}
+
+	public List<Lodge> getHostLodges() {
+		return hostLodges;
+	}
+
+	public List<Booking> getGuestLodges() {
+		return guestBookings;
 	}
 
 	@Override

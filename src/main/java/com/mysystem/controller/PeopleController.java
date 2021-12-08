@@ -1,29 +1,21 @@
-package com.mysystem.rest;
-
-import java.net.URI;
-import java.util.List;
+package com.mysystem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.mysystem.dto.PeopleDTO;
 import com.mysystem.services.PeopleService;
 
 @RestController
 @RequestMapping(value = "/people")
 //@Component
 //@ViewScoped
-public class PeopleRest {
+public class PeopleController {
 	
 	@Autowired
 	private PeopleService service;
-	
+
+	/*		
 	@GetMapping("/all")
 	public ResponseEntity<List<PeopleDTO>> findAll(){
 		List<PeopleDTO> list = service.findAll();
@@ -35,12 +27,12 @@ public class PeopleRest {
 		dto = service.findByEmail(dto.getEmail());
 		return ResponseEntity.ok().body(dto);		
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<PeopleDTO> insert(@RequestBody PeopleDTO dto){
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
-	
+*/	
 }
