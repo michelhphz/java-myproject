@@ -33,6 +33,10 @@ public class Project implements Serializable {
 	@JoinColumn(name = "valuation_id")
 	private List<Valuation> valuations;	
 	
+	@OneToMany
+	@JoinColumn(name = "comment_id")	
+	private List<Comment> comments;		
+	
 	public Project() {
 		
 	}
@@ -109,6 +113,10 @@ public class Project implements Serializable {
 
 	public List<Valuation> getValuations() {
 		return valuations;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
 	}
 
 	@Override

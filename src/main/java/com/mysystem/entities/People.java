@@ -41,6 +41,14 @@ public class People implements Serializable {
     @OneToMany(mappedBy = "orderPeople")
     private List<Order> orders;	
     
+	@OneToMany
+	@JoinColumn(name = "post_id")	
+	private List<Post> posts;
+	
+	@OneToMany
+	@JoinColumn(name = "comment_id")	
+	private List<Comment> comments;	
+    
 	@ManyToMany
 	@JoinTable(name = "adress_people",
 			   joinColumns = @JoinColumn(name = "people_id"),
@@ -111,6 +119,10 @@ public class People implements Serializable {
 
 	public List<Booking> getGuestLodges() {
 		return guestBookings;
+	}
+	
+	public List<Comment> getComments() {
+		return comments;
 	}
 
 	@Override
