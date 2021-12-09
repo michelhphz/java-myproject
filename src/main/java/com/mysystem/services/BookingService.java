@@ -38,7 +38,7 @@ public class BookingService {
 	}
 	
 	@Transactional
-	public void uptade(Booking booking) {
+	public void update(Booking booking) {
 		bookingRepository.save(booking);
 	}
 }
