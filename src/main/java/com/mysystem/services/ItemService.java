@@ -23,22 +23,22 @@ public class ItemService {
 	}
 	
 	public Optional<Item> findById(Long id){
-		Optional<Item> ItemFind = itemRepository.findById(id);
-		return ItemFind;
+		Optional<Item> itemFind = itemRepository.findById(id);
+		return itemFind;
 	}
 	
 	@Transactional
-	public void insert(Item Item) {
-		itemRepository.save(Item);
+	public void insert(Item item) {
+		itemRepository.save(item);
 	}
 	
 	@Transactional
-	public void delete(Item Item) {
-		itemRepository.delete(Item);
+	public void delete(Item item) {
+		itemRepository.delete(item);
 	}
 	
 	@Transactional
-	public void update(Item Item) {
-		itemRepository.save(Item);
+	public void update(Item item) {
+		itemRepository.save(item);
 	}	
 }
