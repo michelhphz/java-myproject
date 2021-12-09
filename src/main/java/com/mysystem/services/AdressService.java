@@ -1,6 +1,7 @@
 package com.mysystem.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -21,8 +22,8 @@ public class AdressService {
 		return list;
 	}
 	
-	public Adress findById(Adress adress) {
-		Adress adressFind = adressRepository.getById(adress.getId());
+	public Optional<Adress> findById(Long id) {
+		Optional<Adress> adressFind = adressRepository.findById(id);
 		return adressFind;
 	}
 	
