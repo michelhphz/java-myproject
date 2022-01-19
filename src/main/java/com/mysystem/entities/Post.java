@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -34,19 +35,15 @@ public class Post implements Serializable {
 	
 	@OneToMany
 	@JoinColumn(name = "comment_id")	
-	private List<Comment> comments;		
+	private List<Comment> comments;	
+	
+	@OneToOne
+	@JoinColumn(name = "category_id")	
+	private Category category;
 	
 	public Post() {
 	}
 
-	public Post(Long id, String title, String subject, String text, Calendar date, Boolean publish) {
-		this.id = id;
-		this.title = title;
-		this.subject = subject;
-		this.text = text;
-		this.date = date;
-		this.publish = publish;
-	}
 
 	public Long getId() {
 		return id;
@@ -103,6 +100,11 @@ public class Post implements Serializable {
 	public List<Comment> getComments() {
 		return comments;
 	}
+
+	public Category getCategory() {
+		return category;
+	}
+
 
 	@Override
 	public int hashCode() {

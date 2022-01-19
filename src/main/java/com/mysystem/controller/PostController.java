@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mysystem.entities.Post;
 import com.mysystem.services.PostService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value = "/post")
 public class PostController {
@@ -37,9 +39,9 @@ public class PostController {
 	}
 	
 	@PostMapping
-	public BodyBuilder insert(@RequestBody Post post) {
-		postService.update(post);
-		return ResponseEntity.ok();
+	public ResponseEntity<Post> insert(@RequestBody Post post) {
+		Post postInsert = postService.update(post);
+		return ResponseEntity.ok().body(postInsert);
 	}	
 	
 	@PutMapping
